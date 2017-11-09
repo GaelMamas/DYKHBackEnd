@@ -5,7 +5,6 @@ let mongoose = require('mongoose');
 let express = require("express");
 let EventModel = require('../Model/EventModel');
 let UserModel = require('../Model/UserModel');
-let mongodb = require('mongodb');
 let router = express.Router();
 mongoose.Promise = require('bluebird');
 
@@ -15,7 +14,9 @@ import {subDeleteEventFunction, subPostEventFunction,
     subPutEventFunction
 } from '../Utilitaries/SubFunctions'
 
-mongoose.connect('mongodb://localhost/dykhdb');
+let databaseURL = 'mongodb://:@ds251435.mlab.com:51435/dykhdb' || 'mongodb://localhost/dykhdb';
+
+mongoose.connect(databaseURL);
 
 router.get("/getEvents", function (req, res) {
     EventModel.find({}).populate('user').exec(function (err, events) {
