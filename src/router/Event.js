@@ -14,9 +14,14 @@ import {subDeleteEventFunction, subPostEventFunction,
     subPutEventFunction
 } from '../Utilitaries/SubFunctions'
 
-let databaseURL = 'mongodb://:@ds251435.mlab.com:51435/dykhdb' || 'mongodb://localhost/dykhdb';
 
-mongoose.connect(databaseURL);
+mongoose.connect('mongodb://gael:dykh@ds251435.mlab.com:51435/dykhdb' || 'mongodb://localhost/dykhdb');
+
+let db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+
 
 router.get("/getEvents", function (req, res) {
     EventModel.find({}).populate('user').exec(function (err, events) {
