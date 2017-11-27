@@ -15,12 +15,8 @@ import {subDeleteEventFunction, subPostEventFunction,
 } from '../Utilitaries/SubFunctions'
 
 
-mongoose.connect('mongodb://gael:dykh@ds251435.mlab.com:51435/dykhdb' || 'mongodb://localhost/dykhdb');
-
-let db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error:'));
-
+mongoose.connect('mongodb://gael:Yusuf2017@mongodb-gael.alwaysdata.net:27017/gael_dykhdb', {
+    useMongoClient: true,});
 
 
 router.get("/getEvents", function (req, res) {

@@ -6,9 +6,9 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -127,12 +127,6 @@ function specifyExecError(message, response) {
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("mongodb");
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -178,7 +172,7 @@ var OperationCallback = function () {
 exports.default = OperationCallback;
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -205,7 +199,7 @@ var eventSchema = {
 module.exports = mongoose.model('event', eventSchema);
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -228,13 +222,13 @@ var _UserModel = __webpack_require__(2);
 
 var _UserModel2 = _interopRequireDefault(_UserModel);
 
-var _EventModel = __webpack_require__(6);
+var _EventModel = __webpack_require__(5);
 
 var _EventModel2 = _interopRequireDefault(_EventModel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mongodb = __webpack_require__(4); /**
+var mongodb = __webpack_require__(8); /**
                                    * Created by vm32776n on 10/08/2017.
                                    */
 function subPutEventFunction(body, operationCallback, lastOperation) {
@@ -521,10 +515,16 @@ function subDeleteUserFunction(body, operationCallback, lastOperation) {
 }
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("bluebird");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("mongodb");
 
 /***/ }),
 /* 9 */
@@ -535,11 +535,11 @@ module.exports = require("bluebird");
 
 var _ErrorHandling = __webpack_require__(3);
 
-var _OperationCallback = __webpack_require__(5);
+var _OperationCallback = __webpack_require__(4);
 
 var _OperationCallback2 = _interopRequireDefault(_OperationCallback);
 
-var _SubFunctions = __webpack_require__(7);
+var _SubFunctions = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -548,13 +548,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 var mongoose = __webpack_require__(0);
 var express = __webpack_require__(1);
-var EventModel = __webpack_require__(6);
+var EventModel = __webpack_require__(5);
 var UserModel = __webpack_require__(2);
-var mongodb = __webpack_require__(4);
 var router = express.Router();
-mongoose.Promise = __webpack_require__(8);
+mongoose.Promise = __webpack_require__(7);
 
-mongoose.connect('mongodb://localhost/dykhdb');
+mongoose.connect('mongodb://gael:Yusuf2017@mongodb-gael.alwaysdata.net:27017/gael_dykhdb', {
+    useMongoClient: true });
 
 router.get("/getEvents", function (req, res) {
     EventModel.find({}).populate('user').exec(function (err, events) {
@@ -681,11 +681,11 @@ module.exports = router;
 
 var _ErrorHandling = __webpack_require__(3);
 
-var _OperationCallback = __webpack_require__(5);
+var _OperationCallback = __webpack_require__(4);
 
 var _OperationCallback2 = _interopRequireDefault(_OperationCallback);
 
-var _SubFunctions = __webpack_require__(7);
+var _SubFunctions = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -695,9 +695,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mongoose = __webpack_require__(0);
 var express = __webpack_require__(1);
 var UserModel = __webpack_require__(2);
-var mongodb = __webpack_require__(4);
+var mongodb = __webpack_require__(8);
 var router = express.Router();
-mongoose.Promise = __webpack_require__(8);
+mongoose.Promise = __webpack_require__(7);
 
 router.get("/getUsers", function (req, res) {
     UserModel.find({}).exec(function (err, users) {
@@ -830,6 +830,10 @@ var bodyParser = __webpack_require__(11);
 var eventsRouter = __webpack_require__(9);
 var usersRouter = __webpack_require__(10);
 
+//let port = process.env.port ;
+
+//import * as process from "babel-core";
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ "extended": false }));
@@ -838,7 +842,7 @@ app.use('/Event', eventsRouter);
 app.use('/User', usersRouter);
 
 app.listen(8080);
-console.log('Listening to PORT 8080');
+console.log('Listening to PORT ' + 8080);
 
 /***/ })
 /******/ ])));
