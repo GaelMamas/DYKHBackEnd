@@ -10,13 +10,49 @@ mongoose.Promise = require('bluebird');
 
 import {execError} from '../Utilitaries/ErrorHandling';
 import OperationCallback from "../Callbacks/OperationCallback";
-import {subDeleteEventFunction, subPostEventFunction,
+import {
+    subDeleteEventFunction, subPostEventFunction,
     subPutEventFunction
 } from '../Utilitaries/SubFunctions'
 
 
-mongoose.connect('mongodb://gael:Yusuf2017@mongodb-gael.alwaysdata.net:27017/gael_dykhdb', {
-    useMongoClient: true,});
+
+let constants = JSON.parse(require('fs').readFileSync('./src/Constants/config.json'));
+
+
+let buildType = process.argv[2] || 'local';
+let dbUri;
+
+switch(buildType){
+
+    case 'dev':
+
+        console.log('welcome to dev env');
+
+        dbUri = 'mongodb://' + constants.dev.db.DB_USER + ':'
+            + constants.dev.db.DB_PASS+'@' + constants.dev.db.DB_HOST + ':'
+            + constants.dev.db.DB_PORT+'/'+constants.dev.db.DB_NAME;
+
+        break;
+
+    case 'prod':
+        console.log("So far no server is available :(");
+        break
+
+    case 'local':
+    default:
+
+        console.log("welcome to local env");
+
+        dbUri = 'mongodb://' + constants.local.db.DB_HOST + '/' + constants.local.db.DB_NAME;
+
+        break
+}
+
+
+console.log("dbUri = " + dbUri);
+
+mongoose.connect(dbUri, {useMongoClient:true,});
 
 
 router.get("/getEvents", function (req, res) {
@@ -30,7 +66,7 @@ router.get("/getEvents", function (req, res) {
     });
 }).get("/getEventsByTableItem/:item/:itemValue", function (req, res) {
 
-    let filter = JSON.parse('{"'+req.params.item+'":"'+req.params.itemValue+'"}');
+    let filter = JSON.parse('{"' + req.params.item + '":"' + req.params.itemValue + '"}');
     console.log(filter);
     EventModel.find(filter)
         .exec(function (err, event) {
@@ -62,9 +98,9 @@ router.get("/getEvents", function (req, res) {
                         execError(err.message, res);
                     } else {
 
-                        if(events[0] === undefined){
+                        if (events[0] === undefined) {
                             console.log("This user has not any event");
-                        }else{
+                        } else {
                             console.log('Events for this user have been found');
                             console.log(events.user);
                         }
@@ -106,12 +142,12 @@ router.put("/putAnEvent", function (req, res) {
         res.json({"error": true, "message": "The body is not correct"});
     }
 }).put('/putManyEvents', function (req, res) {
-    if(req.body){
+    if (req.body) {
         let operationCallback = new OperationCallback(res);
         for (let i = 0; i < req.body.length; i++) {
             subPutEventFunction(req.body[i], operationCallback, i === req.body.length - 1);
         }
-    }else{
+    } else {
         res.json({"error": true, "message": "The body is not correct"});
     }
 });

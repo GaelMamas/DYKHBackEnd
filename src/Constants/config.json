@@ -1,0 +1,55 @@
+{
+  "prod":{
+    "db":{
+      "DB_HOST":"",
+      "DB_USER":"",
+      "DB_PASS":"",
+      "DB_PORT": null,
+      "DB_NAME":""
+    },
+
+    "server":{
+      "SEVER_HOST":"",
+      "SEVER_USER":"",
+      "SERVER_PASS":"",
+      "SERVER_PORT": null
+    }
+  },
+
+
+  "dev":{
+    "db":{
+      "DB_HOST":"mongodb-gael.alwaysdata.net",
+      "DB_USER":"gael",
+      "DB_PASS":"Yusuf2017",
+      "DB_PORT": 27017,
+      "DB_NAME":"gael_dykhdb"
+    },
+
+    "server":{
+      "SEVER_HOST":"",
+      "SEVER_USER":"",
+      "SERVER_PASS":"",
+      "SERVER_PORT": null
+    }
+  },
+
+
+  "local":{
+    "db":{
+      "DB_HOST":"localhost",
+      "DB_USER":"",
+      "DB_PASS":"",
+      "DB_PORT": "",
+      "DB_NAME":"dykhdb"
+    },
+
+    "server":{
+      "SEVER_HOST":"",
+      "SEVER_USER":"",
+      "SERVER_PASS":"",
+      "SERVER_PORT": null
+    }
+  }
+
+}
