@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({"extended": false}));
 app.use('/Event', eventsRouter);
 app.use('/User', usersRouter);
 
-app.listen(8000);
+app.listen(process.env.PORT || 8000);
 
 console.log('Listening to PORT ' + 8000);
 
