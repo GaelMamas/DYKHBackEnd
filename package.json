@@ -17,12 +17,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    //"build": "webpack",
-    //"test": "echo \"Error: no test specified\" && exit 1",
-    //"start-local": "node ./build/bundle.js local",
-    //"start-dev": "node ./build/bundle.js dev",
     "start": "node ./build/bundle.js dev"
-    //"start-prod": "node ./build/bundle.js prod"
   },
   "author": "",
   "license": "ISC"
