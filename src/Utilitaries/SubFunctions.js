@@ -187,6 +187,9 @@ export function subPutUserFunction2(body, user) {
 
 
 export function subPostEventFunction(body, operationCallback, lastOperation) {
+
+    console.log("body =" + body);
+
     if (body.userId) {
         UserModel.findOne({_id: body.userId}).exec(function (err, user) {
             if (err) {
