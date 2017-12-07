@@ -225,7 +225,7 @@ export function subPostEventFunction(body, operationCallback, lastOperation) {
         });
 
     } else {
-        execError("unknown user", res);
+        execError("unknown user", operationCallback);
     }
 }
 
