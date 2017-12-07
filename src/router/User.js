@@ -40,6 +40,7 @@ router.get("/getUsers", function (req, res) {
     })
 });
 
+//TODO correct An User to A User
 router.post("/postNewUser", function (req, res) {
     if (req.body) {
         let user = new UserModel();

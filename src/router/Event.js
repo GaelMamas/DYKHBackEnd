@@ -30,8 +30,8 @@ switch(buildType){
         console.log('welcome to dev env');
 
         dbUri = 'mongodb://' + constants.dev.db.DB_USER + ':'
-            + constants.dev.db.DB_PASS+'@' + constants.dev.db.DB_HOST + ':'
-            + constants.dev.db.DB_PORT+'/'+constants.dev.db.DB_NAME;
+            + constants.dev.db.DB_PASS +'@' + constants.dev.db.DB_HOST + ':'
+            + constants.dev.db.DB_PORT +'/'+ constants.dev.db.DB_NAME;
 
         break;
 
