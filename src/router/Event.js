@@ -117,7 +117,7 @@ router.get("/getEvents", function (req, res) {
 router.post("/postAnEvent", function (req, res) {
     console.log(req.body);
     if (req.body) {
-        subPostEventFunction(req, res);
+        subPostEventFunction(req.body, res);
     } else {
         console.log('Something gets wrong');
     }
