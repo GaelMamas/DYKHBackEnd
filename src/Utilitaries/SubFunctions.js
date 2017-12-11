@@ -216,7 +216,7 @@ export function subPostEventFunction(body, operationCallback, lastOperation) {
                         operationCallback.addError("we do not know such a user " + body.user);
                     } else {
                         console.log(event);
-                        operationCallback.addError("An new event has been inserted " +  event.id);
+                        operationCallback.addMessage("An new event has been inserted " +  event.id);
                     }
                     if(lastOperation){
                         operationCallback.send();
