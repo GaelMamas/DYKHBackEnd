@@ -117,7 +117,7 @@ router.get("/getEvents", function (req, res) {
 router.post("/postAnEvent", function (req, res) {
     console.log(req.body);
     if (req.body) {
-        subPostEventFunction(req.body, res);
+        subPostEventFunction(req.body, res, true);
     } else {
         console.log('Something gets wrong');
     }
@@ -127,7 +127,7 @@ router.post("/postAnEvent", function (req, res) {
 
         for (let i = 0; i < req.body.length; i++) {
 
-            subPostEventFunction(req.body[i], res);
+            subPostEventFunction(req.body[i], res, i === req.body.length - 1);
         }
     } else {
         console.log('Something gets wrong');
