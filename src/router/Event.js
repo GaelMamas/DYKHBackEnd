@@ -117,17 +117,18 @@ router.get("/getEvents", function (req, res) {
 router.post("/postAnEvent", function (req, res) {
     console.log(req.body);
     if (req.body) {
-        subPostEventFunction(req.body, res, true);
+        let operationCallback = new OperationCallback(res);
+        subPostEventFunction(req.body, operationCallback, true);
     } else {
         console.log('Something gets wrong');
     }
 }).post("/postEventsArray", function (req, res) {
     console.log(req.body);
     if (req.body) {
-
+        let operationCallback = new OperationCallback(res);
         for (let i = 0; i < req.body.length; i++) {
 
-            subPostEventFunction(req.body[i], res, i === req.body.length - 1);
+            subPostEventFunction(req.body[i], operationCallback, i === req.body.length - 1);
         }
     } else {
         console.log('Something gets wrong');
