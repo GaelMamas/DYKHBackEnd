@@ -156,7 +156,7 @@ router.put("/putAnEvent", function (req, res) {
 router.delete("/deleteAnEvent", function (req, res) {
     if (req.body) {
         let operationCallback = new OperationCallback(res);
-        subDeleteEventFunction(req, operationCallback, true);
+        subDeleteEventFunction(req.body, operationCallback, true);
     } else {
         res.json({"error": true, "message": "The body is not correct"});
     }
