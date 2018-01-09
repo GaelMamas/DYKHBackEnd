@@ -133,7 +133,7 @@ router.post("/postAnEvent", function (req, res) {
 });
 
 router.put("/putAnEvent", function (req, res) {
-    console.log(req.body);
+    console.log(req);
     if (req.body) {
         let operationCallback = new OperationCallback(res);
         subPutEventFunction(req.body, operationCallback, true);
