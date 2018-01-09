@@ -48,7 +48,6 @@ switch (buildType) {
         break
 }
 
-
 console.log("dbUri = " + dbUri);
 
 mongoose.connect(dbUri, {useMongoClient: true,});
@@ -134,6 +133,7 @@ router.post("/postAnEvent", function (req, res) {
 });
 
 router.put("/putAnEvent", function (req, res) {
+    console.log(req.body);
     if (req.body) {
         let operationCallback = new OperationCallback(res);
         subPutEventFunction(req.body, operationCallback, true);
@@ -141,6 +141,7 @@ router.put("/putAnEvent", function (req, res) {
         res.json({"error": true, "message": "The body is not correct"});
     }
 }).put('/putManyEvents', function (req, res) {
+    console.log(req.body)
     if (req.body) {
         let operationCallback = new OperationCallback(res);
         for (let i = 0; i < req.body.length; i++) {
@@ -152,7 +153,7 @@ router.put("/putAnEvent", function (req, res) {
 });
 
 router.delete("/deleteAnEvent", function (req, res) {
-    console.log(req);
+    console.log(req.body);
     if (req.body) {
         let operationCallback = new OperationCallback(res);
         subDeleteEventFunction(req.body, operationCallback, true);
@@ -160,7 +161,7 @@ router.delete("/deleteAnEvent", function (req, res) {
         res.json({"error": true, "message": "The body is not correct"});
     }
 }).delete('/deleteManyEvents', function (req, res) {
-    console.log(req);
+    console.log(req.body);
     if (req.body) {
         let operationCallback = new OperationCallback(res);
         for (let i = 0; i < req.body.length; i++) {
