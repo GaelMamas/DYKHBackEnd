@@ -16,22 +16,21 @@ import {
 } from '../Utilitaries/SubFunctions'
 
 
-
 let constants = JSON.parse(require('fs').readFileSync('./src/Constants/config.json'));
 
 
 let buildType = process.argv[2] || 'local';
 let dbUri;
 
-switch(buildType){
+switch (buildType) {
 
     case 'dev':
 
         console.log('welcome to dev env');
 
         dbUri = 'mongodb://' + constants.dev.db.DB_USER + ':'
-            + constants.dev.db.DB_PASS +'@' + constants.dev.db.DB_HOST + ':'
-            + constants.dev.db.DB_PORT +'/'+ constants.dev.db.DB_NAME;
+            + constants.dev.db.DB_PASS + '@' + constants.dev.db.DB_HOST + ':'
+            + constants.dev.db.DB_PORT + '/' + constants.dev.db.DB_NAME;
 
         break;
 
@@ -52,7 +51,7 @@ switch(buildType){
 
 console.log("dbUri = " + dbUri);
 
-mongoose.connect(dbUri, {useMongoClient:true,});
+mongoose.connect(dbUri, {useMongoClient: true,});
 
 
 router.get("/getEvents", function (req, res) {
@@ -127,7 +126,6 @@ router.post("/postAnEvent", function (req, res) {
     if (req.body) {
         let operationCallback = new OperationCallback(res);
         for (let i = 0; i < req.body.length; i++) {
-
             subPostEventFunction(req.body[i], operationCallback, i === req.body.length - 1);
         }
     } else {
@@ -154,6 +152,7 @@ router.put("/putAnEvent", function (req, res) {
 });
 
 router.delete("/deleteAnEvent", function (req, res) {
+    console.log(req);
     if (req.body) {
         let operationCallback = new OperationCallback(res);
         subDeleteEventFunction(req.body, operationCallback, true);
@@ -161,6 +160,7 @@ router.delete("/deleteAnEvent", function (req, res) {
         res.json({"error": true, "message": "The body is not correct"});
     }
 }).delete('/deleteManyEvents', function (req, res) {
+    console.log(req);
     if (req.body) {
         let operationCallback = new OperationCallback(res);
         for (let i = 0; i < req.body.length; i++) {
